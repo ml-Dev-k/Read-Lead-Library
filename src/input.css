@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*Formulaire*/
+.p{
+  @apply m-0 p-0
+}
+
+.input{
+  @apply px-3 pb-1 h-[30px] shadow-sm 
+}
+.input:focus{
+  @apply outline-none
+}
+.submit-btn{
+  @apply border border-gray-700 shadow-sm p-2
+}
+.submit-btn:hover{
+  @apply text-white bg-gray-900
+}
+
+/*header*/
+.header{
+  @apply flex justify-between items-center h-[90px] mx-auto border border-x-2 border-gray-800 bg-black-50 p-2 sm:w-full md:w-2/3 lg:w-1/2
+}
+.search-bar{
+  @apply flex bg-white h-[30px] rounded-full overflow-hidden
+}
+.search-btn{
+  @apply p-[3px] w-[30px] h-[30px] bg-gray-200
+}
+.search-btn:hover{
+  @apply bg-gray-300
+}
+
+/*navigation*/
+.nav-li{
+  @apply p-2 text-white hover:bg-gray-900 px-5 cursor-pointer max-450:px-3 max-450:py-1
+}
+.active{
+  @apply  border-orange-700 bg-gray-900 border-b-2
+}
+
+/*Sidebare*/
+.active-usrBooks-btn{
+  @apply bg-black-900 border-b-2
+}
+
+/*Slides*/
+.slide-overlay{
+  @apply w-full h-full opacity-80 bg-gradient-to-r from-black-900 to-orange-900
+}
+@layer utilities{
+  .slide{
+    @apply aspect-[2/3] max-1100:h-[500px] max-1050:h-[450px] max-1000:h-[400px]
+    max-950:h-[375px] max-900:h-[350px]
+  }
+}
+.slide-title{
+  @apply w-3/4 p-4 text-2xl font-bold text-white max-650:text-xl
+}
+.slide-content{
+  @apply w-2/3 px-3 text-white text-2xl max-650:text-xl
+}
+/*entete*/
+.entete{
+  @apply sticky top-0 bg-black-600 p-3 flex justify-between z-10 h-[60px]
+}
+
+/*scrollBar*/
+.scroller{
+  @apply h-screen overflow-y-scroll scrollbar-thin scrollbar-track-transparent 
+  scrollbar-thumb-gray-600
+}
+
+/*Livres*/
+.book-overlay, .category-overlay{
+  @apply flex items-center justify-center w-full h-full font-semibold text-white bg-gradient-to-r
+  from-black-900 to-gray-900 hover:font-bold hover:brightness-120 transition duration-[250ms] 
+  border border-orange-700 cursor-pointer
+}
+.book-overlay{
+  @apply opacity-80 hover:-translate-y-2
+}
+.category-overlay{
+  @apply opacity-80 hover:opacity-30 max-500:opacity-50
+}
+
+/*Auteurs*/
+.author-overlay{
+  @apply flex items-center justify-center text-sm font-bold text-center text-white opacity-90 bg-black-900 
+  hover:opacity-100 border hover:border-orange-700 cursor-pointer 
+}
+.back-btn{
+  @apply p-2 text-white border border-orange-600 hover:opacity-100 absolute top-2 left-2
+  hover:bg-orange-400 hover:text-black-900 hover:font-bold duration-75 
+}
+.tooltip{
+  @apply opacity-0 border w-[55px] border-gray-300 rounded-sm text-white bg-black-900 px-1 absolute top-[-30px] right-[-7px] group-hover:opacity-100 pointer-events-none font-light
+}
+.noAcces-tooltip{
+  @apply opacity-0 border border-red-600 rounded-md text-white bottom-7 bg-black-900 px-1 absolute -left-8 group-hover:opacity-95 pointer-events-none font-light
+}
+
+/*Buy and Read btn*/
+
+#buy, #read{
+  @apply hover:brightness-120
+}
+
+
+
