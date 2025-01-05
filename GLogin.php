@@ -2,33 +2,37 @@
 session_start();
 require 'vendor/autoload.php';
 
+// Charger les variables d'environnement à partir du fichier .env
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-$clientID = getenv('GOOGLE_CLIENT_ID');
-$clientSecret = getenv('GOOGLE_CLIENT_SECRET');
+
+// Récupérer les variables d'environnement
+
 
 // Mail de bienvenu(e)
 define("SUBJECT", "Bienvenue sur ReadNLead Library!");
-$headers = "From: kanemouhamadoulamine50@gmail.com\r\n"; 
-$headers .= "Reply-To: kanemouhamadoulamine50@gmail.com\r\n";
+$headers = "From: ".$_ENV["MAIL_ADRESS"]."\r\n"; 
+$headers .= "Reply-To: ".$_ENV["MAIL_ADRESS"]."\r\n";
 $headers .= "Content-type: text/plain; charset=UTF-8\r\n";
 define("HEADERS", $headers);
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 function envoyerEmail($userEmail, $userName ,$message) {
     $mail = new PHPMailer(true);
     try {
         // Paramètres de configuration du serveur SMTP
         $mail->isSMTP();                                          
-        $mail->Host       = 'smtp.gmail.com';               
+        $mail->Host       = $_ENV["HOST"];               
         $mail->SMTPAuth   = true;                          
-        $mail->Username   = 'kanemouhamadoulamine50@gmail.com';
-        $mail->Password   = 'ukuj yqgb mmql lrrb';           
+        $mail->Username   = $_ENV["MAIL_ADRESS"];
+        $mail->Password   = $_ENV["MAIL_PASSWORD"];           
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  
         $mail->Port       = 587;                                
 
         // Destinataires
-        $mail->setFrom('kanemouhamadoulamine50@gmail.com', 'ReadNLead');
+        $mail->setFrom($_ENV["MAIL_ADRESS"], 'ReadNLead');
         $mail->addAddress($userEmail, $userName);          
 
         // Contenu de l'email en HTML
@@ -44,12 +48,11 @@ function envoyerEmail($userEmail, $userName ,$message) {
     }
 }
 
-// Appeler la fonction après l'inscription
-
-
+// Fonction pour gérer la connexion Google
 function GLogin(){
-  define("clientID", $clientID);
-  define("ClientSecret", $clientSecret);
+  // Définir les constantes de connexion Google
+  define("clientID", $_ENV['GOOGLE_CLIENT_ID']);
+  define("ClientSecret", $_ENV['GOOGLE_CLIENT_SECRET']);
   define("redirectURL", "http://localhost:5000/inscription.php");    
 
   $client = new Google_Client();
@@ -83,7 +86,6 @@ function GLogin(){
     $rqt = "SELECT * FROM gusers WHERE userEmail = :userEmail";
     $stmt = $pdo->prepare($rqt);
     $param = [":userEmail"=> $userEmail];
-    //$stmt->bindParam(":email", $userEmail, PDO::PARAM_STR);
     $stmt->execute($param);
 
     if ($stmt->rowCount() > 0) {
@@ -128,7 +130,6 @@ function GLogin(){
             ";
           envoyerEmail($userEmail, $userName, $message);
           header("location: accueil.php");
-
         } else {
           header("location: inscription.php");
         }
@@ -145,7 +146,4 @@ function GLogin(){
       </a>";
   }
 }
-
-
 ?>
-

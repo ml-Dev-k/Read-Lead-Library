@@ -3,9 +3,11 @@ session_start();
 ob_start();
 require "functions.php";
 require "vendor/autoload.php";
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-$headers = "From: kanemouhamadoulamine50@gmail.com\r\n"; 
-$headers .= "Reply-To: kanemouhamadoulamine50@gmail.com\r\n";
+$headers = "From: ".$_ENV["MAIL_ADRESS"]."\r\n"; 
+$headers .= "Reply-To: ".$_ENV["MAIL_ADRESS"]."\r\n";
 $headers .= "Content-type: text/plain; charset=UTF-8\r\n";
 define("HEADERS", $headers);
 use PHPMailer\PHPMailer\PHPMailer;
@@ -16,16 +18,16 @@ function recevoirEmail($userEmail, $userName, $subject ,$message) {
     try {
         // Paramètres de configuration du serveur SMTP
         $mail->isSMTP();                                          
-        $mail->Host       = 'smtp.gmail.com';               
+        $mail->Host       = $_ENV["HOST"];               
         $mail->SMTPAuth   = true;                          
-        $mail->Username   = 'kanemouhamadoulamine50@gmail.com';
-        $mail->Password   = 'ukuj yqgb mmql lrrb';           
+        $mail->Username   = $_ENV["MAIL_ADRESS"];
+        $mail->Password   = $_ENV["MAIL_PASSWORD"];           
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  
         $mail->Port       = 587;                                
 
         // Destinataires
         $mail->setFrom($userEmail, $userName);          
-        $mail->addAddress('kanemouhamadoulamine50@gmail.com', 'ReadNLead');
+        $mail->addAddress($_ENV["MAIL_ADRESS"], 'ReadNLead');
 
         // Contenu de l'email en HTML
         $mail->isHTML(true);               
