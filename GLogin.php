@@ -1,7 +1,11 @@
 <?php
 session_start();
 require 'vendor/autoload.php';
-/*PwQ8OIBxLNijju*/
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+$clientID = getenv('GOOGLE_CLIENT_ID');
+$clientSecret = getenv('GOOGLE_CLIENT_SECRET');
 
 // Mail de bienvenu(e)
 define("SUBJECT", "Bienvenue sur ReadNLead Library!");
@@ -44,8 +48,8 @@ function envoyerEmail($userEmail, $userName ,$message) {
 
 
 function GLogin(){
-  define("clientID", "276599306076-7m1btpn7h99ckebtiu7rog1vcpev8j05.apps.googleusercontent.com");
-  define("ClientSecret","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");
+  define("clientID", $clientID);
+  define("ClientSecret", $clientSecret);
   define("redirectURL", "http://localhost:5000/inscription.php");    
 
   $client = new Google_Client();
