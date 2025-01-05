@@ -44,7 +44,7 @@ function envoyerEmail($userEmail, $userName ,$message) {
         $mail->send();
         echo 'Message envoyé avec succès';
     } catch (Exception $e) {
-        echo "Erreur lors de l'envoi de l'email: $e";
+        echo "Erreur lors de l'envoi de l'email:";
     }
 }
 
