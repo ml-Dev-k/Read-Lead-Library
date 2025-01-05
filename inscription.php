@@ -3,7 +3,7 @@ require_once "functions.php";
 require "GLogin.php";
 
 try {
-    $pdo = new PDO("mysql: host=localhost; dbname=readnlead", "root", "");
+    $pdo = new PDO("mysql:host=".$_ENV['DB_HOST'].";dbname=".$_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
     //echo "connexion réussie !";
 } catch (PDOException $e) {
     echo "Erreur : ".$e->getMessage();

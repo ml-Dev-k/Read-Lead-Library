@@ -64,7 +64,7 @@ function GLogin(){
 
   // Connexion à la base de données
   try {
-      $pdo = new PDO("mysql:host=localhost;dbname=readnlead", "root", "");
+    $pdo = new PDO("mysql:host=".$_ENV['DB_HOST'].";dbname=".$_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
   } catch (PDOException $e) {
       die("Erreur : " . $e->getMessage());
   }
