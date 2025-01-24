@@ -53,7 +53,7 @@ function GLogin(){
   // Définir les constantes de connexion Google
   define("clientID", $_ENV['GOOGLE_CLIENT_ID']);
   define("ClientSecret", $_ENV['GOOGLE_CLIENT_SECRET']);
-  define("redirectURL", "http://localhost:5000/inscription.php");    
+  define("redirectURL", "http://localhost:3000/inscription.php");    
 
   $client = new Google_Client();
   $client->setClientId(clientID);
