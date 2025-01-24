@@ -22,7 +22,6 @@ function main(){
 
   //recherche general
   $('#main-search-field').on('input', function () {
-    $("html, body").animate({ scrollTop: 0 }, 1000);
     let key = $(this).val().trim();  
     if (key) {
       $(".ecranA").hide()
